@@ -1,2 +1,6 @@
 .venv/
 Movies_and_TV.json
+
+data/__pycache__/
+vectorizers/__pycache__/
+models/__pycache__/
