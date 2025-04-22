@@ -5,7 +5,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from data.parse import parse_json, combine_text_fields
-from vectorizers.tdidf_vectorizer import TfidfVectorizerWrapper
+from vectorizers.tfidf_vectorizer import TfidfVectorizerWrapper
 from models.mlp import MLPClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
