@@ -2,7 +2,7 @@
 import json
 from sklearn.preprocessing import OneHotEncoder
 import numpy as np
-
+import random
 file_path = "Movies_and_TV.json"
 
 def parse_json(file_path, limit=None):
@@ -24,6 +24,7 @@ def parse_json(file_path, limit=None):
                     })
             except json.JSONDecodeError:    
                 continue
+    random.shuffle(reviews)
     return reviews
 
 def combine_text_fields(reviews):
