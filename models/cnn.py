@@ -5,7 +5,7 @@ from keras.optimizers import Adam
 class CNNClassifier:
     def __init__(self, vocab_size=10000, embedding_dim=64, max_length=100, num_classes=5):
         self.model = Sequential([
-            Embedding(input_dim=vocab_size, output_dim=embedding_dim, input_length=max_length),
+            Embedding(input_dim=vocab_size, output_dim=embedding_dim),
             Conv1D(filters=128, kernel_size=5, activation="relu"),
             GlobalMaxPooling1D(),
             Dropout(0.3),
