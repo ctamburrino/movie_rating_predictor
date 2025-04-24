@@ -10,5 +10,8 @@ def get_model(model_name, input_dim, **kwargs):
             max_length=input_dim,
             num_classes=kwargs.get("num_classes", 5)
         )
+    elif model_name == "lstm":
+        from models.lstm import LSTMClassifier
+        return LSTMClassifier()
     else:
         raise ValueError(f"Model {model_name} not found")

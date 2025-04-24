@@ -15,9 +15,9 @@ import numpy as np
 file_path = "Movies_and_TV.json"
 
 # tfidf or tokenizer
-vectorizer_name = "tfidf"
+vectorizer_name = "tokenizer"
 # mlp or cnn
-model_name = "mlp"
+model_name = "lstm"
 
 print("Parsing data...")
 data = parse_json(file_path,10000)
@@ -26,7 +26,7 @@ texts, labels = combine_text_fields(data)
 # tokenizer vectorizer - num_words and max_length are optional parameters
 # tfidf vectorizer - max_features is optional parameter
 print("Vectorizing text...")
-vectorizer = get_vectorizer(vectorizer_name, max_features=10000)
+vectorizer = get_vectorizer(vectorizer_name)
 X = vectorizer.fit_transform(texts)
 
 print("Encoding labels...")
