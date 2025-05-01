@@ -13,5 +13,8 @@ def get_model(model_name, input_dim, **kwargs):
     elif model_name == "lstm":
         from models.lstm import LSTMClassifier
         return LSTMClassifier()
+    elif model_name == "bert":
+        from models.bert import BERTLSTMClassifier
+        return BERTLSTMClassifier(num_classes=kwargs.get("num_classes", 5))
     else:
         raise ValueError(f"Model {model_name} not found")
