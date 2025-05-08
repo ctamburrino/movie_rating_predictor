@@ -6,7 +6,7 @@ class TfidfVectorizerWrapper:
     A wrapper class for TfidfVectorizer to provide a consistent interface
     for vectorizing text, regardless of the vectorizer used.
     """
-    def __init__(self, max_features=10000):
+    def __init__(self, max_features):
         """
         Initializes the TF-IDF vectorizer.
 
