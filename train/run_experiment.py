@@ -41,13 +41,39 @@ timings['encoding'] = time.time() - start_time
 
 print("Splitting data...")
 start_time = time.time()
-# First split: separate test set
-X_temp, X_test, y_temp, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
-# Second split: separate validation set
-X_train, X_val, y_train, y_val = train_test_split(X_temp, y_temp, test_size=0.2, random_state=42, stratify=y_temp)
+if model_name == "bert":
+    # BERT-specific data splitting
+    idx_train, idx_test, y_train, y_test = train_test_split(
+        np.arange(len(y)), y, test_size=0.2, random_state=42, stratify=y
+    )
+    X_train_raw = {
+        'input_ids': X['input_ids'][idx_train],
+        'attention_mask': X['attention_mask'][idx_train]
+    }
+    X_test_raw = {
+        'input_ids': X['input_ids'][idx_test],
+        'attention_mask': X['attention_mask'][idx_test]
+    }
+
+    idx_train2, idx_val, y_train, y_val = train_test_split(
+        np.arange(len(y_train)), y_train, test_size=0.2, random_state=42, stratify=y_train
+    )
+    X_train = {
+        'input_ids': X_train_raw['input_ids'][idx_train2],
+        'attention_mask': X_train_raw['attention_mask'][idx_train2]
+    }
+    X_val = {
+        'input_ids': X_train_raw['input_ids'][idx_val],
+        'attention_mask': X_train_raw['attention_mask'][idx_val]
+    }
+else:
+    # First split: separate test set
+    X_temp, X_test, y_temp, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+    # Second split: separate validation set
+    X_train, X_val, y_train, y_val = train_test_split(X_temp, y_temp, test_size=0.2, random_state=42, stratify=y_temp)
 timings['splitting'] = time.time() - start_time
 
-input_dim = X.shape[1]
+input_dim = X_train['input_ids'].shape[1] if model_name == "bert" else X.shape[1]
 
 print(f"Training model: {model_name}...")
 start_time = time.time()
@@ -59,13 +85,19 @@ timings['training'] = time.time() - start_time
 
 print("Evaluating model...")
 start_time = time.time()
-loss, accuracy = model.evaluate(X_test, y_test)
+if model_name == "bert":
+    loss, accuracy = model.evaluate(X_test_raw)
+else:
+    loss, accuracy = model.evaluate(X_test, y_test)
 timings['evaluation'] = time.time() - start_time
 
 print(f"Test Loss: {loss:.4f}, Test Accuracy: {accuracy:.4f}")
 
 # Get predictions for detailed metrics
-y_pred = model.model.predict(X_test)
+if model_name == "bert":
+    y_pred = model.model.predict(X_test_raw)
+else:
+    y_pred = model.model.predict(X_test)
 y_pred_classes = np.argmax(y_pred, axis=1)
 y_true_classes = np.argmax(y_test, axis=1)
 
