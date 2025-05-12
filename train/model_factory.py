@@ -1,4 +1,15 @@
 def get_model(model_name, input_dim, **kwargs):
+    """
+    Factory function to get a model based on the model name.
+
+    Parameters:
+    - model_name (str): The name of the model to get.
+    - input_dim (int): The dimension of the input data.
+    - **kwargs: Additional keyword arguments for the model.
+
+    Returns:
+    - model: The model object.
+    """
     if model_name == "mlp":
         from models.mlp import MLPClassifier
         return MLPClassifier(input_dim)
