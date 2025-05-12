@@ -17,18 +17,10 @@ class MLPClassifier:
         """
         self.model = Sequential([
             Input(shape=(input_dim,)),
-            Dense(512, activation="relu", kernel_regularizer=l2(0.001)),
-            BatchNormalization(),
-            Dropout(0.4),
-            Dense(256, activation="relu", kernel_regularizer=l2(0.001)),
-            BatchNormalization(),
+            Dense(128, activation="relu"),
             Dropout(0.3),
-            Dense(128, activation="relu", kernel_regularizer=l2(0.001)),
-            BatchNormalization(),
+            Dense(64, activation="relu"),
             Dropout(0.2),
-            Dense(64, activation="relu", kernel_regularizer=l2(0.001)),
-            BatchNormalization(),
-            Dropout(0.1),
             Dense(5, activation="softmax")
         ])
 
