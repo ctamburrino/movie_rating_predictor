@@ -19,6 +19,44 @@ from sklearn.model_selection import train_test_split, StratifiedKFold
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import accuracy_score, classification_report
 
+def getVectorizerOption():
+    valid_option = False
+    while valid_option == False:
+        option = input("What vectorizer option would you like?\n1. TFIDF\n2. Tokenizer\n3. Berts\nEnter integer: ")
+        if option == "1":
+            valid_option = True
+            return "tfidf"
+        elif option == "2":
+            valid_option = True
+            return "tokenizer"
+        elif option == "3":
+            valid_option = True
+            return "berts"
+        else:
+            print("Invalid input")
+            valid_option = False
+
+def getModelOption():
+    valid_option = False
+    while valid_option == False:
+        option = input("What model option would you like?\n1. MLP\n2. CNNr\n3. LSTM\n4. Bert\nEnter integer: ")
+        if option == "1":
+            valid_option = True
+            return "mlp"
+        elif option == "2":
+            valid_option = True
+            return "cnn"
+        elif option == "3":
+            valid_option = True
+            return "lstm"
+        elif option == "4":
+            valid_option = True
+            return "bert"
+        else:
+            print("Invalid input")
+            valid_option = False
+
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from data.parse import parse_json, combine_text_fields
@@ -27,8 +65,8 @@ from model_factory import get_model
 
 file_path = "Movies_and_TV.json"
 
-vectorizer_name = "berts" # "tfidf", "tokenizer", or "berts"
-model_name = "bert" # "mlp", "cnn", "lstm", or "bert"
+vectorizer_name = getVectorizerOption()  # "tfidf", "tokenizer", or "berts"
+model_name = getModelOption() # "mlp", "cnn", "lstm", or "bert"
 
 # Dictionary to store timing information
 timings = {}
