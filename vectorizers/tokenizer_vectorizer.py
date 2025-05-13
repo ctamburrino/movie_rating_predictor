@@ -1,3 +1,15 @@
+
+"""
+Implements a tokenizer wrapper.
+
+Authors:
+- Cory Tamburrino
+- David Kujawinski
+- Dinh Troung
+
+Date Last Modified: 5/12/2025
+"""
+
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
