@@ -28,11 +28,6 @@ class TfidfVectorizerWrapper:
             max_features=max_features,
             stop_words='english',
             ngram_range=(1, 2),  # Use both unigrams and bigrams
-            min_df=2,  # Ignore terms that appear in less than 2 documents
-            max_df=0.95,  # Ignore terms that appear in more than 95% of documents
-            sublinear_tf=True,  # Apply sublinear scaling to term frequencies
-            analyzer='word',
-            token_pattern=r'(?u)\b\w\w+\b'  # Match words with 2 or more characters
         )
 
     def fit_transform(self, texts):
