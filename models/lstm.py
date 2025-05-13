@@ -28,7 +28,7 @@ class LSTMClassifier:
         """
         self.model = Sequential([
             Input(shape=(max_seq_len,)),
-            Embedding(input_dim=vocab_size, output_dim=embedding_dim, input_length=max_seq_len),
+            Embedding(input_dim=vocab_size, output_dim=embedding_dim),
             LSTM(64),
             Dropout(0.3),
             Dense(64, activation="relu"),
