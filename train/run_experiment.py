@@ -27,8 +27,8 @@ from model_factory import get_model
 
 file_path = "Movies_and_TV.json"
 
-vectorizer_name = "tfidf" # "tfidf", "tokenizer", or "berts"
-model_name = "mlp" # "mlp", "cnn", "lstm", or "bert"
+vectorizer_name = "tokenizer" # "tfidf", "tokenizer", or "berts"
+model_name = "lstm" # "mlp", "cnn", "lstm", or "bert"
 
 # Dictionary to store timing information
 timings = {}
@@ -105,17 +105,6 @@ else:
 timings['evaluation'] = time.time() - start_time
 
 print(f"Test Loss: {loss:.4f}, Test Accuracy: {accuracy:.4f}")
-
-# Get predictions for detailed metrics
-if model_name == "bert":
-    y_pred = model.model.predict(X_test_raw)
-else:
-    y_pred = model.model.predict(X_test)
-y_pred_classes = np.argmax(y_pred, axis=1)
-y_true_classes = np.argmax(y_test, axis=1)
-
-print("\nDetailed Classification Report:")
-print(classification_report(y_true_classes, y_pred_classes))
 
 print("\nTiming Information:")
 print(f"Data Parsing: {timings['parsing']:.2f} seconds")
