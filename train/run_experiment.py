@@ -35,7 +35,7 @@ timings = {}
 
 print("Parsing data...")
 start_time = time.time()
-data = parse_json(file_path, limit=1000)
+data = parse_json(file_path, limit=100)
 texts, labels = combine_text_fields(data)
 timings['parsing'] = time.time() - start_time
 
@@ -99,7 +99,7 @@ timings['training'] = time.time() - start_time
 print("Evaluating model...")
 start_time = time.time()
 if model_name == "bert":
-    loss, accuracy = model.evaluate(X_test_raw)
+    loss, accuracy = model.evaluate(X_test_raw, y_test)
 else:
     loss, accuracy = model.evaluate(X_test, y_test)
 timings['evaluation'] = time.time() - start_time
