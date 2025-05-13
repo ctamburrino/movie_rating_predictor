@@ -1,3 +1,14 @@
+"""
+Implements a long short-term memory (LSTM) classifier.
+
+Authors:
+- Cory Tamburrino
+- David Kujawinski
+- Dinh Troung
+
+Date Last Modified: 5/12/2025
+"""
+
 from tensorflow.keras.models import Sequential 
 from tensorflow.keras.layers import Input, Embedding, LSTM, Dense, Dropout
 from tensorflow.keras.optimizers import Adam

@@ -1,3 +1,14 @@
+""" 
+Implements a TF-IDF vectorizer wrapper.
+
+Authors:
+- Cory Tamburrino
+- David Kujawinski
+- Dinh Troung
+
+Date Last Modified: 5/12/2025
+"""
+
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 class TfidfVectorizerWrapper:

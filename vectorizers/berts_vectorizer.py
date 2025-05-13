@@ -1,13 +1,43 @@
-# berts_vectorizer.py
+"""
+Implements a BERT tokenizer wrapper.
+
+Authors:
+- Cory Tamburrino
+- David Kujawinski
+- Dinh Troung
+
+Date Last Modified: 5/12/2025
+"""
+
 from transformers import BertTokenizer
 import numpy as np
 
 class BertTokenizerWrapper:
+    """
+    A wrapper class for BertTokenizer to provide a consistent interface
+    for vectorizing text, regardless of the vectorizer used.
+    """
     def __init__(self, model_name='bert-base-uncased', max_len=128):
+        """
+        Initializes the BertTokenizerWrapper.
+
+        Parameters:
+        - model_name (str): The name of the BERT model to use.
+        - max_len (int): The maximum length of the input text.
+        """
         self.tokenizer = BertTokenizer.from_pretrained(model_name)
         self.max_len = max_len
 
     def fit_transform(self, texts):
+        """
+        Fits the tokenizer to the texts and returns the transformed texts.
+
+        Parameters:
+        - texts (list): A list of texts to transform.
+
+        Returns:
+        - A dictionary containing the input IDs and attention masks.
+        """
         input_ids = []
         attention_masks = []
 
@@ -30,4 +60,13 @@ class BertTokenizerWrapper:
         }
 
     def transform(self, texts):
+        """
+        Transforms the texts and returns the transformed texts.
+
+        Parameters:
+        - texts (list): A list of texts to transform.
+
+        Returns:
+        - A dictionary containing the input IDs and attention masks.
+        """
         return self.fit_transform(texts)

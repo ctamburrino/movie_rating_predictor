@@ -1,3 +1,14 @@
+"""
+Implements a CNN classifier.
+
+Authors:
+- Cory Tamburrino
+- David Kujawinski
+- Dinh Troung
+
+Date Last Modified: 5/12/2025
+"""
+
 from keras.models import Sequential
 from keras.layers import Embedding, Dense, Conv1D, GlobalMaxPooling1D, Dropout
 from keras.optimizers import Adam

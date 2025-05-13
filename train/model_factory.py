@@ -1,3 +1,14 @@
+"""
+Implements a factory function to get a model based on the model name.
+
+Authors:
+- Cory Tamburrino
+- David Kujawinski
+- Dinh Troung
+
+Date Last Modified: 5/12/2025
+"""
+
 def get_model(model_name, input_dim, **kwargs):
     """
     Factory function to get a model based on the model name.

@@ -1,3 +1,14 @@
+"""
+Implements a factory function to get a vectorizer based on the vectorizer name.
+
+Authors:
+- Cory Tamburrino
+- David Kujawinski
+- Dinh Troung
+
+Date Last Modified: 5/12/2025
+"""
+
 def get_vectorizer(vectorizer_name, **kwargs):
     """
     Factory function to get a vectorizer based on the vectorizer name.

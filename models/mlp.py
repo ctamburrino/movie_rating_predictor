@@ -1,9 +1,17 @@
+"""
+Implements a multi-layer perceptron (MLP) classifier.
+
+Authors:
+- Cory Tamburrino
+- David Kujawinski
+- Dinh Troung
+
+Date Last Modified: 5/12/2025
+"""
+
 from tensorflow.keras.models import Sequential 
 from tensorflow.keras.layers import Input, Dense, Dropout, BatchNormalization
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.regularizers import l2
 import tensorflow as tf
-
 class MLPClassifier:
     """
     A class for a multi-layer perceptron (MLP) classifier.

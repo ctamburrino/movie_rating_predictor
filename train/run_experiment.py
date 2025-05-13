@@ -1,3 +1,16 @@
+"""
+Runs an experiment by selecting a file path, vectorizer, and model.
+It then parses the data, vectorizes the text, encodes the labels, splits the data,
+trains the model, and evaluates the model.
+
+Authors:
+- Cory Tamburrino
+- David Kujawinski
+- Dinh Troung
+
+Date Last Modified: 5/12/2025
+"""
+
 import sys
 import os
 import numpy as np

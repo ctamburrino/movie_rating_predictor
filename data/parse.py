@@ -1,4 +1,15 @@
-# Function to parse overall, reviewText, and summaryText from json file
+"""
+Parses reviews from a JSON file using an index file for efficient random sampling.
+Combines the summary and text fields from reviews into a single text field and vectorizes the overall ratings.
+
+Authors:
+- Cory Tamburrino
+- David Kujawinski
+- Dinh Troung
+
+Date Last Modified: 5/12/2025
+"""
+
 import json
 from sklearn.preprocessing import OneHotEncoder
 import numpy as np

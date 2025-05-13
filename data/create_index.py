@@ -1,3 +1,15 @@
+"""
+Creates an index file that maps line numbers to file positions.
+This allows for fast random access to specific lines in the JSON file.
+
+Authors:
+- Cory Tamburrino
+- David Kujawinski
+- Dinh Troung
+
+Date Last Modified: 5/12/2025
+"""
+
 import json
 import os
 import pickle
