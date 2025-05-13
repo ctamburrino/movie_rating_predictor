@@ -11,7 +11,8 @@ Date Last Modified: 5/12/2025
 
 from tensorflow.keras.models import Sequential 
 from tensorflow.keras.layers import Input, Dense, Dropout, BatchNormalization
-import tensorflow as tf
+from tensorflow.keras.optimizers import Adam
+
 class MLPClassifier:
     """
     A class for a multi-layer perceptron (MLP) classifier.
@@ -50,16 +51,9 @@ class MLPClassifier:
         """
         self.model.fit(
             X_train, y_train,
-            epochs=10,
+            epochs=5,
             batch_size=128,
             validation_data=(X_val, y_val),
-            callbacks=[
-                tf.keras.callbacks.EarlyStopping(
-                    monitor='val_loss',
-                    patience=3,
-                    restore_best_weights=True
-                )
-            ]
         )
 
     def evaluate(self, X_test, y_test):
