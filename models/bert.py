@@ -9,8 +9,18 @@ Authors:
 Date Last Modified: 5/12/2025
 """
 
+import os
+import warnings
+import logging as py_logging
+from transformers import TFBertModel, logging as hf_logging
 import tensorflow as tf
-from transformers import TFBertModel
+
+# Suppress Hugging Face and TensorFlow warnings
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+py_logging.getLogger('tensorflow').setLevel(py_logging.ERROR)
+hf_logging.set_verbosity_error()
+
 
 class BERTLSTMClassifier(tf.keras.Model):
     """
@@ -25,7 +35,10 @@ class BERTLSTMClassifier(tf.keras.Model):
         - dropout_rate (float): The dropout rate.
         """
         super(BERTLSTMClassifier, self).__init__()
-        self.bert = TFBertModel.from_pretrained('bert-base-uncased')
+        self.bert = TFBertModel.from_pretrained(
+            'bert-base-uncased',
+            add_pooling_layer=False  # disables unused pooler to avoid gradient warnings
+        )
         self.lstm = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64))
         self.dropout = tf.keras.layers.Dropout(dropout_rate)
         self.classifier = tf.keras.layers.Dense(num_classes, activation='softmax')
@@ -52,29 +65,30 @@ class BERTLSTMClassifier(tf.keras.Model):
         Trains the BERT LSTM classifier.
 
         Parameters:
-        - X_train (numpy.ndarray): The training input data.
-        - y_train (numpy.ndarray): The training output data.
-        - X_val (numpy.ndarray): The validation input data.
-        - y_val (numpy.ndarray): The validation output data.
-        - batch_size (int): The batch size for training.
-        - epochs (int): The number of epochs to train for.
+        - X_train (dict): Training inputs (input_ids + attention_mask).
+        - y_train (np.ndarray): Training labels.
+        - X_val (dict): Validation inputs.
+        - y_val (np.ndarray): Validation labels.
+        - batch_size (int): Batch size.
+        - epochs (int): Number of epochs.
         """
-        self.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=2e-5),
-                     loss='categorical_crossentropy',
-                     metrics=['accuracy'])
-        self.fit(X_train, y_train, validation_data=(X_val, y_val),
-                 batch_size=batch_size, epochs=epochs)
+        self.compile(
+            optimizer=tf.keras.optimizers.Adam(learning_rate=2e-5),
+            loss='categorical_crossentropy',
+            metrics=['accuracy']
+        )
+        self.fit(
+            X_train, y_train,
+            validation_data=(X_val, y_val),
+            batch_size=batch_size,
+            epochs=epochs
+        )
 
     def evaluate(self, *args, **kwargs):
         """
         Evaluates the BERT LSTM classifier.
 
-        Parameters:
-        - args: Additional arguments for the evaluate method.
-        - kwargs: Additional keyword arguments for the evaluate method.
-
         Returns:
-        - A tuple of the loss and accuracy.
+        - A tuple of (loss, accuracy).
         """
         return super().evaluate(*args, **kwargs)
-

@@ -27,15 +27,15 @@ from model_factory import get_model
 
 file_path = "Movies_and_TV.json"
 
-vectorizer_name = "tokenizer" # "tfidf", "tokenizer", or "berts"
-model_name = "lstm" # "mlp", "cnn", "lstm", or "bert"
+vectorizer_name = "berts" # "tfidf", "tokenizer", or "berts"
+model_name = "bert" # "mlp", "cnn", "lstm", or "bert"
 
 # Dictionary to store timing information
 timings = {}
 
 print("Parsing data...")
 start_time = time.time()
-data = parse_json(file_path, limit=100000)
+data = parse_json(file_path, limit=1000)
 texts, labels = combine_text_fields(data)
 timings['parsing'] = time.time() - start_time
 
